@@ -1,3 +1,3 @@
 npm run build
 
-server ./build
+serve ./build -p 80
