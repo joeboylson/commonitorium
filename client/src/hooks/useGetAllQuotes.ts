@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { SERVER_URL } from "../constants";
 import { Quote, QuotesSearchResults } from "../types";
+import { toServerUrl } from "../utils";
 
 export const useGetAllQuotes = () => {
   const [allResults, setAllResults] = useState<Quote[]>();
@@ -9,7 +9,7 @@ export const useGetAllQuotes = () => {
 
   useEffect(() => {
     setLoading(true);
-    const url = `${SERVER_URL}/search/all`;
+    const url = toServerUrl(`/search/all`);
 
     axios
       .get(url)

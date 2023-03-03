@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { isEmpty } from "lodash";
 import { useNavigate } from "react-router-dom";
-import { SERVER_URL } from "../../constants";
+import { toServerUrl } from "../../utils";
 
 const PostLoginHandler = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const PostLoginHandler = () => {
     const { search } = window.location;
     const urlParams = new URLSearchParams(search);
     const code = urlParams.get("code");
-    const url = `${SERVER_URL}/authenticate/post-login?code=${code}`;
+    const url = toServerUrl(`/authenticate/post-login?code=${code}`);
 
     axios
       .get(url)

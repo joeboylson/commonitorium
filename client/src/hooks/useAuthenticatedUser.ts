@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { SERVER_URL } from "../constants";
 import { User } from "../types";
+import { toServerUrl } from "../utils";
 
 type hookCallback = () => void;
 
@@ -12,7 +12,7 @@ export const useAuthenticatedUser = (onFinally?: hookCallback) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${SERVER_URL}/authenticate/profile`)
+      .get(toServerUrl(`/authenticate/profile`))
       .then(({ data }) => {
         const _user = data === "" ? undefined : (data as User);
         setUser(_user);
