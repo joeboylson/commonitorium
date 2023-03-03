@@ -1,13 +1,11 @@
 FROM node:18-alpine as base
 
-WORKDIR /client
+WORKDIR /
 
-COPY ./package*.json /client/
-
-FROM base AS dev
+COPY ./package*.json /
 
 ENV NODE_ENV=development
 
 RUN npm install
 
-COPY ./client /client
+COPY ./client /

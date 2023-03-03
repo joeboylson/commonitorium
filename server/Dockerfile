@@ -1,11 +1,10 @@
 FROM node:18-alpine as base
 
-WORKDIR /server
+WORKDIR /
 
-COPY ./package*.json /server/
+COPY ./package*.json /
 
-ENV NODE_ENV=development
+RUN npm install -g nodemon
+RUN npm install
 
-RUN npm install -g nodemon && npm install
-
-COPY ./server /server
+COPY ./server /
