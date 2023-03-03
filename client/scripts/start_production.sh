@@ -1,3 +1,3 @@
 npm run build
 
-serve ./build -p 80
+serve ./build -p 3000
