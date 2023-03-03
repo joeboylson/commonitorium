@@ -1,13 +1,46 @@
 version: '3.7'
 
+
 services:
 
+  # CLIENT
+  client:
+    container_name: commonitorium-client
+    build:
+      context: ./client
+      target: dev
+    volumes:
+      - ./client:/client
+    command: npm run start:dev
+    ports:
+      - "3000:3000"
+    env_file:
+      .env
+ 
+
+  # SERVER
+  server:
+    container_name: commonitorium-server
+    build:
+      context: ./server
+      target: dev
+    volumes:
+      - ./server:/server
+    command: npm run start:dev
+    ports:
+      - "8000:8000"
+    env_file:
+      .env
+    depends_on:
+      - elasticsearch
+
+
+  # ELASTICSEARCH DB
   elasticsearch:
-    container_name: elasticsearch
+    container_name: commonitorium-elasticsearch
     image: elasticsearch:8.6.0
-    environment:
-      - xpack.security.enabled=false
-      - discovery.type=single-node
+    env_file:
+      .env
     ulimits:
       memlock:
         soft: -1
@@ -22,15 +55,6 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
-
-
-  server:
-    build: ./server
-    command: npm run start
-    volumes:
-      - ./server:/app
-    ports:
-      - "3000:3000"
 
 
 volumes:

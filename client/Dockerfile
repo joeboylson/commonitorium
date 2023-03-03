@@ -1,8 +1,7 @@
 FROM node:18-alpine as base
 
-WORKDIR /server
-COPY ./package*.json /server/
-
+WORKDIR /client
+COPY ./package*.json /client/
 
 # PRODUCTION STAGE
 
@@ -17,6 +16,7 @@ RUN echo "???"
 FROM base AS dev
 
 ENV NODE_ENV=development
-RUN npm install -g nodemon && npm install
+
+RUN npm install
 COPY . /
-CMD ["npm run start:dev"]
+CMD ["npm", "run", "start:dev"]
