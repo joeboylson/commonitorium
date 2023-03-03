@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const elasticsearch = require("elasticsearch");
 
+const SERVER_PORT = process.env.SERVER_PORT;
+
 // routers
 const { authenticationRouter, searchRouter } = require("../routes");
 
@@ -26,7 +28,7 @@ const cookieParserConfig = cookieParser();
 const bodyParserConfig = bodyParser.json();
 
 const corsConfig = cors({
-  origin: "http://localhost:3000",
+  origin: `http://localhost:${SERVER_PORT}`,
   methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
   credentials: true,
 });
@@ -61,8 +63,8 @@ const startApp = (app) => {
     return console.log("elasticsearch: 9200");
   });
 
-  console.log("express: 8000");
-  app.listen(8000);
+  console.log(`express: ${SERVER_PORT}`);
+  app.listen(SERVER_PORT);
 };
 
 module.exports = {
