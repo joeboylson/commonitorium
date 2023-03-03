@@ -1,6 +1,7 @@
 import axios from "axios";
 import { debounce, isEmpty } from "lodash";
 import { useEffect, useMemo, useState } from "react";
+import { SERVER_URL } from "../constants";
 import { Quote, QuotesSearchResults } from "../types";
 
 export const useGlobalSearch = () => {
@@ -18,8 +19,8 @@ export const useGlobalSearch = () => {
       return;
     }
 
-    setLoading(true)
-    const url = `/search/global?search=${searchValue}`;
+    setLoading(true);
+    const url = `${SERVER_URL}/search/global?search=${searchValue}`;
     axios
       .get(url)
       .then((results) => {

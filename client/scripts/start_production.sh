@@ -1,3 +1,3 @@
 npm run build
 
-serve ./build -p 3000
+serve ./build -p -s 3000

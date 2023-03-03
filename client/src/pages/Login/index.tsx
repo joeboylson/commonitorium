@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { SERVER_URL } from "../../constants";
 
 const Login = () => {
   const [hasCompletedQuery, setHasCompletedQuery] = useState<boolean>(false);
@@ -9,7 +10,7 @@ const Login = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("/authenticate/auth-url")
+      .get(`${SERVER_URL}/authenticate/auth-url`)
       .then(({ data }) => {
         const _redirectUrl = data === "" ? undefined : data;
         setAuthenticationUrl(_redirectUrl);
